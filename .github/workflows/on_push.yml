@@ -23,7 +23,7 @@ jobs:
         run: xcodegen
       -
         name: Build app to run linters
-        run: xcodebuild -scheme WakaTime
+        run: xcodebuild -scheme PerspectTVA
 
   version:
     name: Version
