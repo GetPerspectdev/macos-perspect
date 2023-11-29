@@ -211,7 +211,7 @@ jobs:
   release:
     name: Release
     runs-on: macos-latest
-    # needs: [version, sign, changelog]
+    needs: test #[version, sign, changelog]
     steps:
       -
         name: Checkout
