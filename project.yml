@@ -1,7 +1,7 @@
-name: WakaTime
+name: PerspectTVA
 
 options:
-  bundleIdPrefix: macos-wakatime
+  bundleIdPrefix: macos-tva
   createIntermediateGroups: true
 
 packages:
@@ -13,7 +13,7 @@ packages:
     from: 10.0.0
 
 targets:
-  WakaTime:
+  PerspectTVA:
     type: application
     platform: macOS
     deploymentTarget: 10.15
@@ -56,7 +56,7 @@ targets:
     settings:
       CURRENT_PROJECT_VERSION: local-build
       MARKETING_VERSION: local-build
-      INFOPLIST_FILE: WakaTime Helper/WakaTime Helper-Info.plist
+      INFOPLIST_FILE: WakaTime Helper/Perspect_TVA Helper-Info.plist
       GENERATE_INFOPLIST_FILE: YES
       CODE_SIGN_STYLE: Automatic
       DEVELOPMENT_TEAM: ${SV_DEVELOPMENT_TEAM}
