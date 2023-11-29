@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
     var monitoredAppsWindowController = MonitoredAppsWindowController()
     var wakaTime: WakaTime?
 
-    let updater = AppUpdater(owner: "wakatime", repo: "macos-wakatime")
+    let updater = AppUpdater(owner: "GetPerspectdev", repo: "macos-TVA")
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Handle deep links
@@ -76,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
     }
 
     @objc func dashboardClicked(_ sender: AnyObject) {
-        if let url = URL(string: "https://wakatime.com/") {
+        if let url = URL(string: "https://app.perspect.xyz/") {
             NSWorkspace.shared.open(url)
         }
     }
