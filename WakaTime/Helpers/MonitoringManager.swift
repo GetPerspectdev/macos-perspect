@@ -54,7 +54,6 @@ class MonitoringManager {
             case .figma:
                 return HeartbeatData(
                     entity: title,
-                    language: "Figma Design",
                     category: .designing)
             case .postman:
                 return HeartbeatData(
@@ -88,13 +87,28 @@ class MonitoringManager {
             case .canva:
                 return HeartbeatData(
                     entity: title,
-                    language: "Canva Design",
                     category: .designing)
             case .whatsapp:
                 return HeartbeatData(
                     entity: title,
                     category: .meeting)
             case .zoom:
+                return HeartbeatData(
+                    entity: title,
+                    category: .meeting)
+            case .notion:
+                return HeartbeatData(
+                    entity: title,
+                    category: .communicating)
+            case .msexcel:
+                return HeartbeatData(
+                    entity: title,
+                    category: .building)
+            case .msoutlook:
+                return HeartbeatData(
+                    entity: title,
+                    category: .communicating)
+            case .msteams:
                 return HeartbeatData(
                     entity: title,
                     category: .meeting)
