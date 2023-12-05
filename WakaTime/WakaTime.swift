@@ -17,12 +17,6 @@ class WakaTime: HeartbeatEventHandler {
     @Atomic var lastTime = 0
     @Atomic var lastCategory = Category.coding
 
-    // MARK: Constants
-
-    enum Constants {
-        static let settingsDeepLink: String = "wakatime://settings"
-    }
-
     // MARK: Initialization and Setup
 
     init(_ delegate: StatusBarDelegate) {
@@ -49,6 +43,10 @@ class WakaTime: HeartbeatEventHandler {
             }
             print("********* End Running Applications *********")
         }
+
+        if !PropertiesManager.hasLaunchedBefore {
+            PropertiesManager.hasLaunchedBefore = true
+        }
     }
 
     private func configureFirebase() {
@@ -67,9 +65,15 @@ class WakaTime: HeartbeatEventHandler {
     }
 
     private func openSettingsDeeplink() {
-        if let url = URL(string: Constants.settingsDeepLink) {
-            NSWorkspace.shared.open(url)
-        }
+        guard let url = DeepLink.settings.url else { return }
+
+        NSWorkspace.shared.open(url)
+    }
+
+    private func openMonitoredAppsDeeplink() {
+        guard let url = DeepLink.monitoredApps.url else { return }
+
+        NSWorkspace.shared.open(url)
     }
 
     // MARK: Watcher Event Handling
@@ -106,7 +110,7 @@ class WakaTime: HeartbeatEventHandler {
         guard MonitoringManager.isAppMonitored(app) else { return }
 
         guard
-            let appName = AppInfo.getAppName(app),
+            let appName = AppInfo.getAppNameForHeartbeat(app),
             let appVersion = watcher.getAppVersion(app)
         else { return }
 
@@ -148,6 +152,13 @@ class WakaTime: HeartbeatEventHandler {
     }
 }
 
+enum DeepLink: String {
+    case settings
+    case monitoredApps
+
+    var url: URL? { URL(string: "wakatime://\(self)") }
+}
+
 enum EntityType: String {
     case file
     case app
@@ -165,6 +176,7 @@ enum Category: String {
 
 protocol StatusBarDelegate: AnyObject {
     func a11yStatusChanged(_ hasPermission: Bool)
+    func toastNotification(_ title: String)
 }
 
 protocol HeartbeatEventHandler {

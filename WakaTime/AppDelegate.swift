@@ -8,7 +8,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
     var statusBarA11yItem: NSMenuItem!
     var statusBarA11ySeparator: NSMenuItem!
     var statusBarA11yStatus: Bool = true
-    var notificationsEnabled: Bool = false
     var settingsWindowController = SettingsWindowController()
     var monitoredAppsWindowController = MonitoredAppsWindowController()
     var wakaTime: WakaTime?
@@ -59,7 +58,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
                 }
                 return
             }
-            self.notificationsEnabled = true
         }
     }
 
@@ -67,11 +65,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
         // Handle deep links
         guard let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
               let url = URL(string: urlString),
-              url.scheme == "wakatime"
+              url.scheme == "wakatime",
+              let link = DeepLink(rawValue: url.host ?? "")
         else { return }
 
-        if url.host == "settings" {
-            showSettings()
+        switch link {
+            case .settings:
+                showSettings()
+            case .monitoredApps:
+                showMonitoredApps()
         }
     }
 
@@ -91,9 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
 
     @objc func checkForUpdatesClicked(_ sender: AnyObject) {
         updater.check {
-            if self.notificationsEnabled {
-                self.sendNotification(title: "Updating to latest release")
-            }
+            self.toastNotification("Updating to latest release")
         }.catch(policy: .allErrors) { error in
             if error.isCancelled {
                 let alert = NSAlert()
@@ -150,13 +150,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
         monitoredAppsWindowController.showWindow(self)
     }
 
-    private func sendNotification(title: String, body: String = "") {
+    internal func toastNotification(_ title: String) {
         let content = UNMutableNotificationContent()
         content.title = title
-
-        if !body.isEmpty {
-            content.body = body
-        }
 
         let uuidString = UUID().uuidString
         let request = UNNotificationRequest(

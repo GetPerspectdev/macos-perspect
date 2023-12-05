@@ -16,7 +16,7 @@ class MonitoringManager {
             let isMonitored = UserDefaults.standard.bool(forKey: isMonitoredKey)
             return isMonitored
         } else {
-            UserDefaults.standard.set(true, forKey: isMonitoredKey)
+            UserDefaults.standard.set(false, forKey: isMonitoredKey)
             UserDefaults.standard.synchronize()
         }
         return true
