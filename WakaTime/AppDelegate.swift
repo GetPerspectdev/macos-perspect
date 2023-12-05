@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
     }
 
     @objc func dashboardClicked(_ sender: AnyObject) {
-        if let url = URL(string: "https://app.perspect.xyz/") {
+        if let url = URL(string: "https://app.perspect.xyz/my-tva") {
             NSWorkspace.shared.open(url)
         }
     }
