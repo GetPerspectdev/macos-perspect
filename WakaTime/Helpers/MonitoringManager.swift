@@ -16,7 +16,7 @@ class MonitoringManager {
             let isMonitored = UserDefaults.standard.bool(forKey: isMonitoredKey)
             return isMonitored
         } else {
-            UserDefaults.standard.set(false, forKey: isMonitoredKey)
+            UserDefaults.standard.set(true, forKey: isMonitoredKey)
             UserDefaults.standard.synchronize()
         }
         return true
@@ -112,6 +112,14 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .meeting)
+            case .adobexd:
+                return HeartbeatData(
+                    entity: title,
+                    category: .designing)
+            case .adobeillustrator:
+                return HeartbeatData(
+                    entity: title,
+                    category: .designing)
             case .xcode:
                 fatalError("Xcode should never use window title")
         }
