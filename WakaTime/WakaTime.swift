@@ -85,10 +85,20 @@ class WakaTime: HeartbeatEventHandler {
             entity == lastEntity,
             lastTime + 120 > time
         else { return true }
-
+        print("rejected")
+        
         return false
     }
-
+    
+    private func hasItBeenTwoSeconds(time: Int) -> Bool {
+        guard
+            lastTime + 5 > time
+        else { return true }
+        print("5 second rule rejected")
+        
+        return false
+    }
+    
     public func handleHeartbeatEvent(
         app: NSRunningApplication,
         entity: String,
@@ -98,8 +108,13 @@ class WakaTime: HeartbeatEventHandler {
         isWrite: Bool) {
         let time = Int(NSDate().timeIntervalSince1970)
         let category = category ?? Category.coding
+        print(category)
+        print(entity)
+        print(isWrite)
+        print(time)
+        guard hasItBeenTwoSeconds(time: time) else {return}
         guard shouldSendHeartbeat(entity: entity, time: time, isWrite: isWrite, category: category) else { return }
-
+        print("IT IS SENT...........")
         lastEntity = entity
         lastTime = time
         lastCategory = category
