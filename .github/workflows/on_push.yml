@@ -102,7 +102,7 @@ jobs:
         id: build
         run: |
           xcodebuild -scheme WakaTime -configuration Release
-          app=`find /Users/runner/Library/Developer/Xcode/DerivedData/ -name Perspect.app`
+          app=`find /Users/runner/Library/Developer/Xcode/DerivedData/ -name WakaTime.app`
           echo "$app"
           directory=`dirname $app`
           echo "$directory"
