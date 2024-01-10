@@ -142,7 +142,7 @@ class WakaTime: HeartbeatEventHandler {
             "--category",
             category.rawValue,
             "--plugin",
-            "\(appName)/\(appVersion) macos-wakatime/" + Bundle.main.version,
+            "\(appName)/\(appVersion) macos-perspect/" + Bundle.main.version,
         ]
         if isWrite {
             args.append("--write")
