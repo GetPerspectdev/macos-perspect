@@ -13,7 +13,7 @@ packages:
     from: 10.0.0
 
 targets:
-  PerspectTVA:
+  WakaTime:
     type: application
     platform: macOS
     deploymentTarget: 10.15
