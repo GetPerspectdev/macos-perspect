@@ -122,7 +122,7 @@ jobs:
       -
         name: Codesign
         run: |
-          codesign -v --force --deep --timestamp -s "WakaTime" --options runtime ${{ steps.build.outputs.directory }}/WakaTime.app
+          codesign -v --force --deep --timestamp --options runtime ${{ steps.build.outputs.directory }}/WakaTime.app
       -
         name: Store Credentials
         env:
