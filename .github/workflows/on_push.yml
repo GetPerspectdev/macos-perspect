@@ -116,6 +116,10 @@ jobs:
           # The password used to import the PKCS12 file.
           p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
       -
+        name: Find Identity
+        run: |
+          security find-identity
+      -
         name: Codesign
         run: |
           codesign -v --force --deep --timestamp -s "WakaTime" --options runtime ${{ steps.build.outputs.directory }}/WakaTime.app
