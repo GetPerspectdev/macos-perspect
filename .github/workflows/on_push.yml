@@ -118,7 +118,7 @@ jobs:
       -
         name: Codesign
         run: |
-          codesign -v --force --deep --timestamp -s "WakaTime" --options runtime ${{ steps.build.outputs.directory }}/Perspect.app
+          codesign -v --force --deep --timestamp -s "WakaTime" --options runtime ${{ steps.build.outputs.directory }}/WakaTime.app
       -
         name: Store Credentials
         env:
@@ -129,24 +129,24 @@ jobs:
       -
         name: Notarize Helper
         run: |
-          ditto -c -k --keepParent "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Library/LoginItems/Perspect Helper.app" helper.zip
+          ditto -c -k --keepParent "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app" helper.zip
           xcrun notarytool submit helper.zip --keychain-profile "notarytool-profile" --wait
-          xcrun stapler staple "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Library/LoginItems/Perspect Helper.app"
+          xcrun stapler staple "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app"
       -
         name: Notarize App
         run: |
-          ditto -c -k --keepParent ${{ steps.build.outputs.directory }}/Perspect.app main.zip
+          ditto -c -k --keepParent ${{ steps.build.outputs.directory }}/WakaTime.app main.zip
           xcrun notarytool submit main.zip --keychain-profile "notarytool-profile" --wait
-          xcrun stapler staple ${{ steps.build.outputs.directory }}/Perspect.app
+          xcrun stapler staple ${{ steps.build.outputs.directory }}/WakaTime.app
       -
         name: Zip
-        run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/Perspect.app Perspect.zip
+        run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/WakaTime.app WakaTime.zip
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: ./Perspect.zip
+          path: ./WakaTime.zip
       -
         name: Remove tag if failure
         if: ${{ failure() }}
@@ -229,7 +229,7 @@ jobs:
         id: prepare
         run: |
           mkdir release
-          mv ./Perspect.zip release/macos-TVA.zip
+          mv ./WakaTime.zip release/macos-perspect.zip
       -
         name: "Create release"
         uses: softprops/action-gh-release@master
@@ -241,7 +241,7 @@ jobs:
           target_commitish: ${{ github.sha }}
           draft: false
           files: |
-            ./release/macos-TVA.zip
+            ./release/macos-perspect.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       -
