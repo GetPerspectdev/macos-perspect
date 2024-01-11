@@ -23,7 +23,7 @@ jobs:
         run: xcodegen
       -
         name: Build app to run linters
-        run: xcodebuild -scheme WakaTime
+        run: xcodebuild -scheme Perspect
 
   version:
     name: Version
@@ -101,7 +101,7 @@ jobs:
         name: Build app
         id: build
         run: |
-          xcodebuild -scheme WakaTime -configuration Release
+          xcodebuild -scheme Perspect -configuration Release
           app=`find /Users/runner/Library/Developer/Xcode/DerivedData -name Perspect.app`
           echo "$app"
           directory=`dirname $app`
