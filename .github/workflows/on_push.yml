@@ -130,7 +130,7 @@ jobs:
         name: Notarize Helper
         run: |
           ditto -c -k --keepParent "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app" helper.zip
-          xcrun notarytool submit helper.zip --keychain-profile "notarytool-profile" --wait
+          xcrun notarytool submit helper.zip --keychain-profile "notarytool-profile" --wait -v
           xcrun stapler staple "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app"
       -
         name: Notarize App
