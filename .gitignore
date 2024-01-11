@@ -1,4 +1,5 @@
 .DS_Store
+*.xcodeproj
 xcuserdata/
 Mint/
 .build/
