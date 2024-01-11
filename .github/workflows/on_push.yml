@@ -102,7 +102,7 @@ jobs:
         id: build
         run: |
           xcodebuild -scheme WakaTime -configuration Release
-          app=`find /Users/runner/Library/Developer/Xcode/DerivedData/ -name WakaTime.app`
+          app=`find /Users/runner/Library/Developer/Xcode/DerivedData -name WakaTime.app`
           echo "$app"
           directory=`dirname $app`
           echo "$directory"
@@ -116,13 +116,9 @@ jobs:
           # The password used to import the PKCS12 file.
           p12-password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
       -
-        name: Find Identity
-        run: |
-          security find-identity
-      -
         name: Codesign
         run: |
-          codesign -v --force --deep --timestamp --options runtime ${{ steps.build.outputs.directory }}WakaTime.app
+          codesign -v --force --deep --timestamp --options runtime ${{ steps.build.outputs.directory }}/WakaTime.app
       -
         name: Store Credentials
         env:
@@ -133,18 +129,18 @@ jobs:
       -
         name: Notarize Helper
         run: |
-          ditto -c -k --keepParent "${{ steps.build.outputs.directory }}WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app" helper.zip
+          ditto -c -k --keepParent "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app" helper.zip
           xcrun notarytool submit helper.zip --keychain-profile "notarytool-profile" --wait
-          xcrun stapler staple "${{ steps.build.outputs.directory }}WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app"
+          xcrun stapler staple "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app"
       -
         name: Notarize App
         run: |
-          ditto -c -k --keepParent ${{ steps.build.outputs.directory }}WakaTime.app main.zip
+          ditto -c -k --keepParent ${{ steps.build.outputs.directory }}/WakaTime.app main.zip
           xcrun notarytool submit main.zip --keychain-profile "notarytool-profile" --wait
-          xcrun stapler staple ${{ steps.build.outputs.directory }}WakaTime.app
+          xcrun stapler staple ${{ steps.build.outputs.directory }}/WakaTime.app
       -
         name: Zip
-        run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}WakaTime.app Perspect.zip
+        run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/WakaTime.app Perspect.zip
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
