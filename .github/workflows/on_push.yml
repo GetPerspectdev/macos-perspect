@@ -102,7 +102,7 @@ jobs:
         id: build
         run: |
           xcodebuild -scheme WakaTime -configuration Release
-          app=`find /Users/runner/Library/Developer/Xcode/DerivedData/ -name WakaTime.app`
+          app=`find /Users/runner/Library/Developer/Xcode/DerivedData/ -name Perspect.app`
           echo "$app"
           directory=`dirname $app`
           echo "$directory"
@@ -122,7 +122,7 @@ jobs:
       -
         name: Codesign
         run: |
-          codesign -v --force --deep --timestamp --options runtime ${{ steps.build.outputs.directory }}/WakaTime.app
+          codesign -v --force --deep --timestamp --options runtime ${{ steps.build.outputs.directory }}/Perspect.app
       -
         name: Store Credentials
         env:
@@ -133,24 +133,24 @@ jobs:
       -
         name: Notarize Helper
         run: |
-          ditto -c -k --keepParent "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app" helper.zip
+          ditto -c -k --keepParent "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Library/LoginItems/Perspect Helper.app" helper.zip
           xcrun notarytool submit helper.zip --keychain-profile "notarytool-profile" --wait
-          xcrun stapler staple "${{ steps.build.outputs.directory }}/WakaTime.app/Contents/Library/LoginItems/WakaTime Helper.app"
+          xcrun stapler staple "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Library/LoginItems/Perspect Helper.app"
       -
         name: Notarize App
         run: |
-          ditto -c -k --keepParent ${{ steps.build.outputs.directory }}/WakaTime.app main.zip
+          ditto -c -k --keepParent ${{ steps.build.outputs.directory }}/Perspect.app main.zip
           xcrun notarytool submit main.zip --keychain-profile "notarytool-profile" --wait
-          xcrun stapler staple ${{ steps.build.outputs.directory }}/WakaTime.app
+          xcrun stapler staple ${{ steps.build.outputs.directory }}/Perspect.app
       -
         name: Zip
-        run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/WakaTime.app WakaTime.zip
+        run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/Perspect.app Perspect.zip
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: ./WakaTime.zip
+          path: ./Perspect.zip
       -
         name: Remove tag if failure
         if: ${{ failure() }}
@@ -233,7 +233,7 @@ jobs:
         id: prepare
         run: |
           mkdir release
-          mv ./WakaTime.zip release/macos-perspect.zip
+          mv ./Perspect.zip release/macos-perspect.zip
       -
         name: "Create release"
         uses: softprops/action-gh-release@master
