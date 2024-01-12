@@ -87,8 +87,8 @@ jobs:
           valueFile: 'project.yml'
           changes:  |
             {
-              "targets.WakaTime.settings.CURRENT_PROJECT_VERSION": "${{ needs.version.outputs.semver }}",
-              "targets.WakaTime.settings.MARKETING_VERSION": "${{ needs.version.outputs.semver }}"
+              "targets.Perspect.settings.CURRENT_PROJECT_VERSION": "${{ needs.version.outputs.semver }}",
+              "targets.Perspect.settings.MARKETING_VERSION": "${{ needs.version.outputs.semver }}"
             }
           commitChange: false
       -
