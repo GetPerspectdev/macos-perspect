@@ -92,9 +92,9 @@ class WakaTime: HeartbeatEventHandler {
     
     private func hasItBeenTwoSeconds(time: Int) -> Bool {
         guard
-            lastTime + 5 > time
+            lastTime + 10 > time
         else { return true }
-        print("5 second rule rejected")
+        print("10 second rule rejected")
         
         return false
     }

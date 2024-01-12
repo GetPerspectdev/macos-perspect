@@ -1,4 +1,4 @@
-name: PerspectTVA
+name: Perspect
 
 options:
   bundleIdPrefix: macos-tva
@@ -13,7 +13,7 @@ packages:
     from: 10.0.0
 
 targets:
-  PerspectTVA:
+  Perspect:
     type: application
     platform: macOS
     deploymentTarget: 10.15
@@ -32,7 +32,7 @@ targets:
       - script: ./Scripts/Lint/swiftlint lint --quiet
         name: Swiftlint
     dependencies:
-      - target: WakaTime Helper
+      - target: Perspect Helper
       - package: AppUpdater
       - package: Firebase
         product: FirebaseCrashlytics
@@ -41,14 +41,14 @@ targets:
           LOGIN_ITEMS_DIR="$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Library/LoginItems"
           rm -rf "$LOGIN_ITEMS_DIR"
           mkdir -p "$LOGIN_ITEMS_DIR"
-          mv "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Resources/WakaTime Helper.app" "$LOGIN_ITEMS_DIR/"
-        name: Move "WakaTime Helper.app" to LoginItems
+          mv "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Resources/Perspect Helper.app" "$LOGIN_ITEMS_DIR/"
+        name: Move "Perspect Helper.app" to LoginItems
       - script: Scripts/Firebase/upload-dSYM.sh
         name: Firebase
         inputFiles:
           - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}
           - $(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
-  WakaTime Helper:
+  Perspect Helper:
     type: application
     platform: macOS
     deploymentTarget: 10.15
@@ -56,7 +56,7 @@ targets:
     settings:
       CURRENT_PROJECT_VERSION: local-build
       MARKETING_VERSION: local-build
-      INFOPLIST_FILE: WakaTime Helper/Perspect_TVA Helper-Info.plist
+      INFOPLIST_FILE: WakaTime Helper/WakaTime Helper-Info.plist
       GENERATE_INFOPLIST_FILE: YES
       CODE_SIGN_STYLE: Automatic
       DEVELOPMENT_TEAM: ${SV_DEVELOPMENT_TEAM}
