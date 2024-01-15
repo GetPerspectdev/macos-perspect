@@ -100,9 +100,6 @@ extension AXUIElement {
             case .zoom:
                 guard let title = extractPrefix(rawTitle, separator: " - ") else { return nil }
                 return title
-            case .alacritty:
-                guard let title = extractPrefix(rawTitle, separator: " - ") else { return nil }
-                return title
         }
     }
 

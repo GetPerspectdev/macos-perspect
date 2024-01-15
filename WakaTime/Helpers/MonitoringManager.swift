@@ -98,10 +98,6 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .meeting)
-            case .alacritty:
-                return HeartbeatData(
-                    entity: title,
-                    category: .coding)
             case .xcode:
                 fatalError("Xcode should never use window title")
         }
