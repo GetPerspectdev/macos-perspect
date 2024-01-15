@@ -16,7 +16,7 @@ class MonitoringManager {
             let isMonitored = UserDefaults.standard.bool(forKey: isMonitoredKey)
             return isMonitored
         } else {
-            UserDefaults.standard.set(false, forKey: isMonitoredKey)
+            UserDefaults.standard.set(true, forKey: isMonitoredKey)
             UserDefaults.standard.synchronize()
         }
         return true
@@ -54,7 +54,6 @@ class MonitoringManager {
             case .figma:
                 return HeartbeatData(
                     entity: title,
-                    language: "Figma Design",
                     category: .designing)
             case .postman:
                 return HeartbeatData(
@@ -88,7 +87,6 @@ class MonitoringManager {
             case .canva:
                 return HeartbeatData(
                     entity: title,
-                    language: "Canva Design",
                     category: .designing)
             case .whatsapp:
                 return HeartbeatData(
@@ -98,6 +96,30 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .meeting)
+            case .notion:
+                return HeartbeatData(
+                    entity: title,
+                    category: .communicating)
+            case .msexcel:
+                return HeartbeatData(
+                    entity: title,
+                    category: .building)
+            case .msoutlook:
+                return HeartbeatData(
+                    entity: title,
+                    category: .communicating)
+            case .msteams:
+                return HeartbeatData(
+                    entity: title,
+                    category: .meeting)
+            case .adobexd:
+                return HeartbeatData(
+                    entity: title,
+                    category: .designing)
+            case .adobeillustrator:
+                return HeartbeatData(
+                    entity: title,
+                    category: .designing)
             case .xcode:
                 fatalError("Xcode should never use window title")
         }

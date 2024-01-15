@@ -2,7 +2,7 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     struct Constants {
-        static let mainAppBundleID = "macos-wakatime.WakaTime"
+        static let mainAppBundleID = "macos-perspect.Perspect"
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

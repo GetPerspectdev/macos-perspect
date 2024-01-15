@@ -1,4 +1,4 @@
-# macos-wakatime
+# macos-TVA
 
 Mac system tray app for automatic time tracking and metrics generated from your Xcode activity.
 
@@ -45,7 +45,7 @@ The main thing to know is we require specific branch name prefixes for PRs:
 
 Many thanks to all [contributors][authors]!
 
-Made with :heart: by the WakaTime Team.
+Made with :heart: by the Perspect Team.
 
 [api key]: https://wakatime.com/api-key
 [dashboard]: https://wakatime.com/
