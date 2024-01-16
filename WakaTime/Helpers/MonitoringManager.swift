@@ -122,6 +122,10 @@ class MonitoringManager {
                     category: .designing)
             case .xcode:
                 fatalError("Xcode should never use window title")
+            case .linear:
+                return HeartbeatData(
+                    entity: title,
+                    category: .communicating)
         }
     }
 
