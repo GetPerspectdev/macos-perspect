@@ -19,7 +19,6 @@ enum MonitoredApp: String, CaseIterable {
     case zoom = "us.zoom.xos"
     case adobexd = "com.adobe.xd"
     case adobeillustrator = "com.adobe.illustrator"
-    case linear = "com.linear"
 
     init?(from bundleId: String) {
         if let app = MonitoredApp(rawValue: bundleId) {
@@ -40,7 +39,7 @@ enum MonitoredApp: String, CaseIterable {
                                  MonitoredApp.arcbrowser.rawValue, MonitoredApp.notion.rawValue,
                                  MonitoredApp.msoutlook.rawValue, MonitoredApp.msexcel.rawValue,
                                  MonitoredApp.msteams.rawValue, MonitoredApp.adobexd.rawValue,
-                                 MonitoredApp.adobeillustrator.rawValue, MonitoredApp.linear.rawValue]
+                                 MonitoredApp.adobeillustrator.rawValue]
 }
 
 extension NSRunningApplication {
