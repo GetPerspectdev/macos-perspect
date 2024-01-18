@@ -1,7 +1,7 @@
 name: Perspect
 
 options:
-  bundleIdPrefix: macos-tva
+  bundleIdPrefix: macos-perspect
   createIntermediateGroups: true
 
 packages:

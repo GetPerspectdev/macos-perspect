@@ -12,7 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StatusBarDelegate {
     var monitoredAppsWindowController = MonitoredAppsWindowController()
     var wakaTime: WakaTime?
 
-    let updater = AppUpdater(owner: "GetPerspectdev", repo: "macos-TVA")
+    let updater = AppUpdater(owner: "GetPerspectdev", repo: "macos-perspect")
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Handle deep links
