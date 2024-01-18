@@ -38,7 +38,7 @@ class SettingsManager {
                 NSLog(error.localizedDescription)
             }
         } else {
-            if SMLoginItemSetEnabled("macos-tva.WakaTimeHelper" as CFString, true) {
+            if SMLoginItemSetEnabled("macos-perspect.WakaTimeHelper" as CFString, true) {
                 NSLog("Login item enabled successfully.")
             } else {
                 NSLog("Failed to enable login item.")
@@ -57,7 +57,7 @@ class SettingsManager {
                 NSLog(error.localizedDescription)
             }
         } else {
-            if SMLoginItemSetEnabled("macos-tva.WakaTimeHelper" as CFString, false) {
+            if SMLoginItemSetEnabled("macos-perspect.WakaTimeHelper" as CFString, false) {
                 NSLog("Login item disabled successfully.")
             } else {
                 NSLog("Failed to disable login item.")

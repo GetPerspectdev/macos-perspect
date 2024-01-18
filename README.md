@@ -1,4 +1,4 @@
-# macos-TVA
+# macos-perspect
 
 Mac system tray app for automatic time tracking and metrics generated from your Xcode activity.
 
