@@ -5,7 +5,9 @@ enum MonitoredApp: String, CaseIterable {
     case canva = "com.canva.CanvaDesktop"
     case chrome = "com.google.Chrome"
     case figma = "com.figma.Desktop"
+    case adobeillustrator = "com.adobe.illustrator"
     case imessage = "com.apple.MobileSMS"
+    case linear = "com.linear"
     case notion = "notion.id"
     case postman = "com.postmanlabs.mac"
     case safari = "com.apple.Safari"
@@ -18,8 +20,6 @@ enum MonitoredApp: String, CaseIterable {
     case xcode = "com.apple.dt.Xcode"
     case zoom = "us.zoom.xos"
     case adobexd = "com.adobe.xd"
-    case adobeillustrator = "com.adobe.illustrator"
-    case linear = "com.linear"
 
     init?(from bundleId: String) {
         if let app = MonitoredApp(rawValue: bundleId) {
