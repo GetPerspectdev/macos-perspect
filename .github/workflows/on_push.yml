@@ -157,7 +157,7 @@ jobs:
           --icon "Perspect.app" 230 295 \
           --hide-extension "Perspect.app" \
           --app-drop-link 593 295 \
-          "${{ steps.build.outputs.directory }}/Perspect.dmg" \
+          "Perspect.dmg" \
           "${{ steps.build.outputs.directory }}/Perspect.app"
       -
         name: Upload artifacts
