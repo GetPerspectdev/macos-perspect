@@ -146,18 +146,19 @@ jobs:
         run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/Perspect.app Perspect.zip
       -
         name: Dmg
-        run: create-dmg \
-            --volname "Perspect" \
-            --volicon "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/AppIcon.icns" \
-            --background "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/bg.png" \
-            --window-pos 200 120 \
-            --window-size 835 600 \
-            --icon-size 128 \
-            --icon "Perspect.app" 230 295 \
-            --hide-extension "Perspect.app" \
-            --app-drop-link 593 295 \
-            "${{ steps.build.outputs.directory }}/Perspect.dmg" \
-            "${{ steps.build.outputs.directory }}/Perspect.app"
+        run: |
+          create-dmg \
+          --volname "Perspect" \
+          --volicon "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/AppIcon.icns" \
+          --background "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/bg.png" \
+          --window-pos 200 120 \
+          --window-size 835 600 \
+          --icon-size 128 \
+          --icon "Perspect.app" 230 295 \
+          --hide-extension "Perspect.app" \
+          --app-drop-link 593 295 \
+          "${{ steps.build.outputs.directory }}/Perspect.dmg" \
+          "${{ steps.build.outputs.directory }}/Perspect.app"
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
