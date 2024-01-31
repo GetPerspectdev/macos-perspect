@@ -95,6 +95,9 @@ jobs:
         name: Install xcodegen via Homebrew for linting and building xcode project
         run: brew install xcodegen
       -
+        name: Install create-dmg via Homebrew for creating a DMG
+        run: brew install create-dmg
+      -
         name: Generate project
         run: xcodegen
       -
@@ -142,11 +145,27 @@ jobs:
         name: Zip
         run: ditto -c -k --sequesterRsrc --keepParent ${{ steps.build.outputs.directory }}/Perspect.app Perspect.zip
       -
+        name: Dmg
+        run: create-dmg \
+            --volname "Perspect" \
+            --volicon "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/AppIcon.icns" \
+            --background "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/bg.jpeg" \
+            --window-pos 200 120 \
+            --window-size 835 600 \
+            --icon-size 128 \
+            --icon "Perspect.app" 230 295 \
+            --hide-extension "Perspect.app" \
+            --app-drop-link 593 295 \
+            "${{ steps.build.outputs.directory }}/Perspect.dmg" \
+            "${{ steps.build.outputs.directory }}/Perspect.app"
+      -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: ./Perspect.zip
+          path: |
+          ./Perspect.zip
+          ./Perspect.dmg
       -
         name: Remove tag if failure
         if: ${{ failure() }}
