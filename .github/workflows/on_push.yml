@@ -250,6 +250,7 @@ jobs:
         run: |
           mkdir release
           mv ./Perspect.zip release/macos-perspect.zip
+          mv ./Perspect.dmg release/macos-perspect.dmg
       -
         name: "Create release"
         uses: softprops/action-gh-release@master
@@ -262,6 +263,7 @@ jobs:
           draft: false
           files: |
             ./release/macos-perspect.zip
+            ./release/macos-perspect.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       -
