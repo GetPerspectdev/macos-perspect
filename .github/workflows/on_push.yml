@@ -149,7 +149,7 @@ jobs:
         run: create-dmg \
             --volname "Perspect" \
             --volicon "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/AppIcon.icns" \
-            --background "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/bg.jpeg" \
+            --background "${{ steps.build.outputs.directory }}/Perspect.app/Contents/Resources/bg.png" \
             --window-pos 200 120 \
             --window-size 835 600 \
             --icon-size 128 \
