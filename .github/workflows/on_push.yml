@@ -164,8 +164,8 @@ jobs:
         with:
           name: app
           path: |
-          ./Perspect.zip
-          ./Perspect.dmg
+            ./Perspect.zip
+            ./Perspect.dmg
       -
         name: Remove tag if failure
         if: ${{ failure() }}
