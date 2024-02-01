@@ -80,6 +80,10 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .browsing)
+            case .edgebrowser:
+                return HeartbeatData(
+                    entity: title,
+                    category: .browsing)
             case .imessage:
                 return HeartbeatData(
                     entity: title,
