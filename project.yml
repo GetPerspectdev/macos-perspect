@@ -6,7 +6,7 @@ options:
 
 packages:
   AppUpdater:
-    url: https://github.com/alanhamlett/AppUpdater
+    url: https://github.com/GetPerspectdev/AppUpdater
     branch: master
   Firebase:
     url: https://github.com/firebase/firebase-ios-sdk
