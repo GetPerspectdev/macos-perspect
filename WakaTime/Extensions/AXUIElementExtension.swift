@@ -53,7 +53,7 @@ extension AXUIElement {
                 return commonGuard(appName: "Figma", minCount: 2) ?? commonGuard(appName: "Drafts")
             case .postman:
                 return commonGuard(appName: "Postman", fullTitle: true)
-        case .warp, .slack, .safari, .imessage, .whatsapp, .zoom, .notion, .msoutlook, 
+            case .warp, .slack, .safari, .imessage, .whatsapp, .zoom, .notion, .msoutlook,
                 .msexcel, .msteams, .adobexd, .adobeillustrator, .linear:
                 return commonGuard(appName: app.rawValue) // Assuming app.rawValue is the string representation of the app name
             case .canva:
@@ -64,6 +64,8 @@ extension AXUIElement {
                 return commonGuard(appName: "Chrome") ?? commonGuard(appName: "New Tab")
             case .arcbrowser:
                 return commonGuard(appName: "Arc")
+            case .edgebrowser:
+                return commonGuard(appName: "Edge")
             }
     }
 

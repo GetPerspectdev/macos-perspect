@@ -20,6 +20,7 @@ enum MonitoredApp: String, CaseIterable {
     case xcode = "com.apple.dt.Xcode"
     case zoom = "us.zoom.xos"
     case adobexd = "com.adobe.xd"
+    case edgebrowser = "com.microsoft.edgemac"
 
     init?(from bundleId: String) {
         if let app = MonitoredApp(rawValue: bundleId) {
