@@ -86,7 +86,7 @@ class MonitoringManager {
                     category: .browsing)
             case .imessage:
                 return HeartbeatData(
-                    entity: title,
+                    entity: "iMessage",
                     category: .communicating)
             case .canva:
                 return HeartbeatData(
