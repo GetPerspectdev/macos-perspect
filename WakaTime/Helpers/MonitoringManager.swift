@@ -103,7 +103,7 @@ class MonitoringManager {
             case .notion:
                 return HeartbeatData(
                     entity: title,
-                    category: .communicating)
+                    category: .designing)
             case .msexcel:
                 return HeartbeatData(
                     entity: title,
