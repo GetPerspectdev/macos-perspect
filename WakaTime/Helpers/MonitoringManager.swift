@@ -64,6 +64,10 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .coding)
+            case .iterm:
+                return HeartbeatData(
+                    entity: title,
+                    category: .coding)
             case .slack:
                 return HeartbeatData(
                     entity: title,
@@ -103,7 +107,7 @@ class MonitoringManager {
             case .notion:
                 return HeartbeatData(
                     entity: title,
-                    category: .communicating)
+                    category: .designing)
             case .msexcel:
                 return HeartbeatData(
                     entity: title,
