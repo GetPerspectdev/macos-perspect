@@ -6,6 +6,7 @@ enum MonitoredApp: String, CaseIterable {
     case chrome = "com.google.Chrome"
     case edgebrowser = "com.microsoft.edgemac"
     case figma = "com.figma.Desktop"
+    case fleet = "Fleet.app"
     case adobeillustrator = "com.adobe.illustrator"
     case imessage = "com.apple.MobileSMS"
     case iterm = "com.googlecode.iterm2"
@@ -44,7 +45,7 @@ enum MonitoredApp: String, CaseIterable {
                                  MonitoredApp.msoutlook.rawValue, MonitoredApp.msexcel.rawValue,
                                  MonitoredApp.msteams.rawValue, MonitoredApp.adobexd.rawValue,
                                  MonitoredApp.adobeillustrator.rawValue, MonitoredApp.linear.rawValue,
-                                 MonitoredApp.iterm.rawValue]
+                                 MonitoredApp.iterm.rawValue, MonitoredApp.fleet.rawValue]
 }
 
 extension NSRunningApplication {

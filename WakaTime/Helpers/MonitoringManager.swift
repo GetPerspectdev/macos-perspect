@@ -68,6 +68,10 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .coding)
+            case .fleet:
+                return HeartbeatData(
+                    entity: title,
+                    category: .coding)
             case .slack:
                 return HeartbeatData(
                     entity: title,
