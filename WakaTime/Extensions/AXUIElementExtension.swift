@@ -54,7 +54,7 @@ extension AXUIElement {
             case .postman:
                 return commonGuard(appName: "Postman", fullTitle: true)
             case .warp, .slack, .safari, .imessage, .whatsapp, .zoom, .notion, .msoutlook,
-                .msexcel, .msteams, .adobexd, .adobeillustrator, .linear, .iterm:
+                .msexcel, .msteams, .adobexd, .adobeillustrator, .linear, .iterm, .rstudio:
                 return commonGuard(appName: app.rawValue) // Assuming app.rawValue is the string representation of the app name
             case .canva:
                 return commonGuard(appName: "Canva", minCount: 2) ?? commonGuard(appName: "Home")

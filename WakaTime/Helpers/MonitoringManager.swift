@@ -64,6 +64,10 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .coding)
+            case .rstudio:
+                return HeartbeatData(
+                    entity: title,
+                    category: .coding)
             case .iterm:
                 return HeartbeatData(
                     entity: title,

@@ -12,6 +12,7 @@ enum MonitoredApp: String, CaseIterable {
     case linear = "com.linear"
     case notion = "notion.id"
     case postman = "com.postmanlabs.mac"
+    case rstudio = "com.rstudio.desktop"
     case safari = "com.apple.Safari"
     case slack = "com.tinyspeck.slackmacgap"
     case msteams = "com.microsoft.teams2"
@@ -44,7 +45,7 @@ enum MonitoredApp: String, CaseIterable {
                                  MonitoredApp.msoutlook.rawValue, MonitoredApp.msexcel.rawValue,
                                  MonitoredApp.msteams.rawValue, MonitoredApp.adobexd.rawValue,
                                  MonitoredApp.adobeillustrator.rawValue, MonitoredApp.linear.rawValue,
-                                 MonitoredApp.iterm.rawValue]
+                                 MonitoredApp.iterm.rawValue, MonitoredApp.rstudio.rawValue]
 }
 
 extension NSRunningApplication {
