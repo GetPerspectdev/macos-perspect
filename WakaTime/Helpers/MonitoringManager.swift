@@ -128,6 +128,14 @@ class MonitoringManager {
                 return HeartbeatData(
                     entity: title,
                     category: .designing)
+            case .premier:
+                return HeartbeatData(
+                    entity: title,
+                    category: .designing)
+            case .premierbeta:
+                return HeartbeatData(
+                    entity: title,
+                    category: .designing)
             case .adobeillustrator:
                 return HeartbeatData(
                     entity: title,
