@@ -34,18 +34,31 @@ class WakaTime: HeartbeatEventHandler {
         watcher.statusBarDelegate = delegate
 
         // In local dev builds, print bundle-ids of all running apps to Xcode console
-        if Bundle.main.version == "local-build" {
-            print("********* Start Running Applications *********")
+        if Dependencies.isLocalDevBuild {
+            Logging.default.log("********* Start Running Applications *********")
             for runningApp in NSWorkspace.shared.runningApplications where runningApp.activationPolicy == .regular {
                 if let name = runningApp.localizedName, let id = runningApp.bundleIdentifier {
-                    print("\(name): \(id)")
+                    Logging.default.log("\(name): \(id)")
                 }
             }
-            print("********* End Running Applications *********")
+            Logging.default.log("********* End Running Applications *********")
         }
 
         if !PropertiesManager.hasLaunchedBefore {
+            for bundleId in MonitoredApp.defaultEnabledApps {
+                MonitoringManager.enableByDefault(bundleId)
+            }
             PropertiesManager.hasLaunchedBefore = true
+        }
+
+        if MonitoringManager.isMonitoringBrowsing {
+            Task {
+                if let browser = await Dependencies.recentBrowserExtension() {
+                    delegate.toastNotification("Warning: WakaTime \(browser) extension detected. " +
+                        "It’s recommended to only track browsing activity with the \(browser) " +
+                        "extension or Mac Desktop app, but not both.")
+                }
+            }
         }
     }
 
@@ -79,23 +92,11 @@ class WakaTime: HeartbeatEventHandler {
     // MARK: Watcher Event Handling
 
     private func shouldSendHeartbeat(entity: String, time: Int, isWrite: Bool, category: Category) -> Bool {
-        guard
-            !isWrite,
-            category == lastCategory,
-            entity == lastEntity,
-            lastTime + 120 > time
-        else { return true }
-        print("rejected")
-        
-        return false
-    }
-    
-    private func hasItBeenTwoSeconds(time: Int) -> Bool {
-        guard
-            lastTime + 10 > time
-        else { return true }
-        print("10 second rule rejected")
-        
+        if isWrite { return true }
+        if category != lastCategory { return true }
+        if !entity.isEmpty && entity != lastEntity { return true }
+        if lastTime + 120 < time { return true }
+
         return false
     }
     
@@ -103,6 +104,7 @@ class WakaTime: HeartbeatEventHandler {
         app: NSRunningApplication,
         entity: String,
         entityType: EntityType,
+        project: String?,
         language: String?,
         category: Category?,
         isWrite: Bool) {
@@ -112,12 +114,9 @@ class WakaTime: HeartbeatEventHandler {
         print(entity)
         print(isWrite)
         print(time)
-        guard hasItBeenTwoSeconds(time: time) else {return}
+        print(app)
+        //guard hasItBeenTwoSeconds(time: time) else {return}
         guard shouldSendHeartbeat(entity: entity, time: time, isWrite: isWrite, category: category) else { return }
-        print("IT IS SENT...........")
-        lastEntity = entity
-        lastTime = time
-        lastCategory = category
 
         // make sure we should be tracking this app to avoid race condition bugs
         // do this after shouldSendHeartbeat for better performance because handleEvent may
@@ -140,10 +139,14 @@ class WakaTime: HeartbeatEventHandler {
             "--entity-type",
             entityType.rawValue,
             "--category",
-            category.rawValue,
+            category.rawValue.replacingOccurrences(of: "_", with: " "),
             "--plugin",
             "\(appName)/\(appVersion) macos-perspect/" + Bundle.main.version,
         ]
+        if let project {
+            args.append("--project")
+            args.append(project)
+        }
         if isWrite {
             args.append("--write")
         }
@@ -152,7 +155,11 @@ class WakaTime: HeartbeatEventHandler {
             args.append(language)
         }
 
-        NSLog("Sending heartbeat with: \(args)")
+        Logging.default.log("Sending heartbeat with: \(args)")
+
+        lastEntity = entity
+        lastTime = time
+        lastCategory = category
 
         process.arguments = args
         process.standardOutput = FileHandle.nullDevice
@@ -162,7 +169,7 @@ class WakaTime: HeartbeatEventHandler {
             // with ObjC exception bridging on macOS 12 or earlier and Process.run() on macOS 13 or newer.
             try process.execute()
         } catch {
-            NSLog("Failed to run wakatime-cli: \(error)")
+            Logging.default.log("Failed to run wakatime-cli: \(error)")
         }
     }
 }
@@ -182,11 +189,21 @@ enum EntityType: String {
 enum Category: String {
     case browsing
     case building
+    case codereviewing = "code reviewing"
     case coding
     case communicating
     case debugging
     case designing
+    case indexing
+    case learning
+    case manualtesting = "manual testing"
     case meeting
+    case planning
+    case researching
+    case runningtests = "running tests"
+    case translating
+    case writingdocs = "writing docs"
+    case writingtests = "writing tests"
 }
 
 protocol StatusBarDelegate: AnyObject {
@@ -199,6 +216,7 @@ protocol HeartbeatEventHandler {
         app: NSRunningApplication,
         entity: String,
         entityType: EntityType,
+        project: String?,
         language: String?,
         category: Category?,
         isWrite: Bool)
