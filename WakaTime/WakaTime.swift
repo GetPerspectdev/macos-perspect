@@ -29,6 +29,7 @@ class WakaTime: HeartbeatEventHandler {
         }
 
         configureFirebase()
+        configurePerspect()
         checkForApiKey()
         watcher.heartbeatEventHandler = self
         watcher.statusBarDelegate = delegate
@@ -62,6 +63,10 @@ class WakaTime: HeartbeatEventHandler {
         if apiKey.isEmpty {
             openSettingsDeeplink()
         }
+    }
+
+    private func configurePerspect() {
+        ConfigFile.setSetting(section: "settings", key: "api_url", val: "https://loom.getperspect.dev/api/v1")
     }
 
     private func openSettingsDeeplink() {
